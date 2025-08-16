@@ -24,7 +24,7 @@ export default function Home() {
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b bg-white shadow-sm">
         <button className="text-2xl font-bold">☰</button>
-        <h1 className="text-lg font-semibold">Aditya.AI</h1>
+        <h1 className="text-lg font-semibold">ASK.AI</h1>
         <UserButton afterSignOutUrl="/" />
       </div>
 
@@ -32,7 +32,7 @@ export default function Home() {
       <div className="flex items-center justify-center h-full bg-gray-100">
         <SignInButton mode="modal">
           <button className="px-6 py-3 bg-indigo-600 text-white text-sm rounded-lg shadow hover:bg-indigo-700 transition">
-            🚀 Sign in to Aditya.AI to start chatting
+            🚀 Sign in to ASK.AI to start chatting
           </button>
         </SignInButton>
       </div>
