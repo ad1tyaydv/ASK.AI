@@ -1,18 +1,12 @@
-// app/api/chat/route.ts
-import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function POST(req: Request) {
-  const { userId } = await auth(); // 🔐 Check if user is signed in
-
-  if (!userId) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
   const { message } = await req.json();
+  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const result = await model.generateContent(message);
 
-  // Your chat logic here (for now, just return dummy data)
-  const reply = `This is a simulated reply to: "${message}"`;
-
-  return NextResponse.json({ reply });
+  return NextResponse.json({ reply: result.response.text() });
 }

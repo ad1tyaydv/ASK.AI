@@ -24,7 +24,7 @@ export default function Home() {
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b bg-white shadow-sm">
         <button className="text-2xl font-bold">☰</button>
-        <h1 className="text-lg font-semibold">Chat App</h1>
+        <h1 className="text-lg font-semibold">Aditya.AI</h1>
         <UserButton afterSignOutUrl="/" />
       </div>
 
