@@ -27,7 +27,7 @@ export default function ChatBox({ onSend }: ChatBoxProps) {
           onKeyDown={(e) => e.key === "Enter" && handleSend()}
         />
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600 text-sm"
+          className="bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600 text-sm cursor-pointer"
           onClick={handleSend}
         >
           <FaArrowCircleUp />

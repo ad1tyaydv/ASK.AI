@@ -1,14 +1,11 @@
 "use client";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { useState } from "react";
 import ChatBox from "@/components/chatbox";
 import MessageList from "@/components/messagelist";
 
 export default function Home() {
-  const [messages, setMessages] = useState<
-    { role: "user" | "ai"; text: string }[]
-  >([]);
-
-  const [menuOpen, setMenuOpen] = useState(false); // toggle menu
+  const [messages, setMessages] = useState<{ role: "user" | "ai"; text: string }[]>([]);
 
   const handleSend = async (message: string) => {
     setMessages((prev) => [...prev, { role: "user", text: message }]);
@@ -24,37 +21,34 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen bg-gray-50 text-black relative">
-      {/* Header with menu */}
+      {/* Header */}
       <div className="flex items-center justify-between p-4 border-b bg-white shadow-sm">
-        <button
-          className="text-2xl font-bold"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
-        <h1 className="text-lg font-semibold">Aditya AI</h1>
+        <button className="text-2xl font-bold">☰</button>
+        <h1 className="text-lg font-semibold">Chat App</h1>
+        <UserButton afterSignOutUrl="/" />
       </div>
 
-      {/* Menu Dropdown */}
-      {menuOpen && (
-        <div className="absolute top-14 left-4 bg-white border shadow-lg rounded-lg w-48 z-50 p-2">
-          <ul className="space-y-2 text-sm">
-            <li className="hover:bg-gray-100 p-2 rounded cursor-pointer">⚙️ Settings</li>
-            <li className="hover:bg-gray-100 p-2 rounded cursor-pointer">🧼 Clear Chat</li>
-            <li className="hover:bg-gray-100 p-2 rounded cursor-pointer">🚪 Logout</li>
-          </ul>
+          <SignedOut>
+      <div className="flex items-center justify-center h-full bg-gray-100">
+        <SignInButton mode="modal">
+          <button className="px-6 py-3 bg-indigo-600 text-white text-sm rounded-lg shadow hover:bg-indigo-700 transition">
+            🚀 Sign in to Aditya.AI to start chatting
+          </button>
+        </SignInButton>
+      </div>
+    </SignedOut>
+
+
+      <SignedIn>
+        {/* Chat Section */}
+        <div className="flex-1 overflow-y-auto p-4">
+          <MessageList messages={messages} />
         </div>
-      )}
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4">
-        <MessageList messages={messages} />
-      </div>
-
-      {/* ChatBox */}
-      <div className="border-t p-4 sticky bottom-0 bg-white">
-        <ChatBox onSend={handleSend} />
-      </div>
+        <div className="border-t p-4 sticky bottom-0 bg-white">
+          <ChatBox onSend={handleSend} />
+        </div>
+      </SignedIn>
     </div>
   );
 }
