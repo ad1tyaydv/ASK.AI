@@ -14,7 +14,6 @@ export default function MessageList({ messages }: MessageListProps) {
             msg.role === "user" ? "justify-end" : "justify-start"
           }`}
         >
-          {/* AI Avatar */}
           {msg.role === "ai" && (
             <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 text-white flex items-center justify-center text-sm font-bold">
               <FaRobot />
@@ -29,7 +28,6 @@ export default function MessageList({ messages }: MessageListProps) {
             }`}
           >
             <p className="whitespace-pre-wrap text-sm">{msg.text}</p>
-            {/* Tail for bubble */}
             <div
               className={`absolute bottom-0 w-3 h-3 rotate-45 ${
                 msg.role === "user"
@@ -39,7 +37,6 @@ export default function MessageList({ messages }: MessageListProps) {
             />
           </div>
 
-          {/* User Avatar */}
           {msg.role === "user" && (
             <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 text-white flex items-center justify-center text-sm font-bold">
               🙋‍♂️
